@@ -12,7 +12,11 @@
         "spline",
         "catmullrom"
     ],
-    "author": "",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/SatoshiKawabata/SVGCatmullRomSpline"
+    },
+    "author": "SatoshiKawabata <kwst.andromeda.ma@gmail.com> (http://qiita.com/kwst)",
     "license": "ISC",
     "dependencies": {
         "simplify-js": "^1.2.1"
