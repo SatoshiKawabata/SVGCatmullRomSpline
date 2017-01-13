@@ -5,6 +5,20 @@ Make path line of SVG smooth.
 - Convert series of CatmullRom points to Spline
 - Simplify points (use [simplify-js](https://github.com/mourner/simplify-js))
 
+### Demo
+[demo page](https://satoshikawabata.github.io/SVGCatmullRomSpline/)
+
+## Install
+### npm
+```
+npm i svg-catmull-rom-spline
+```
+
+### download from url
+```
+https://satoshikawabata.github.io/SVGCatmullRomSpline/bundle.js
+```
+
 ## Usage
 ### get spline points
 ```js
