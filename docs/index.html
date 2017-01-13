@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./bundle.js"></script>
+    <style>
+        body {
+            margin: 0;
+            width: 100%;
+            height: 1000px;
+        }
+        
+        .tool {
+            position: absolute;
+        }
+        
+        #svg {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tool">
+        <button id="clear">clear</button>
+        <select name="control" id="control">
+    <option value="bezier">bezier</option>
+    <option value="line">simple line</option>
+  </select>
+        <label>tolerance</label>
+        <input type="range" min="0" max="7" id="omit" name="omit" step="0.1" value="3" />
+        <label id="omit-label"></label>
+    </div>
+    <svg id="svg" />
+</body>
+<script>
+    var container = document.getElementById('svg');
+    var control = document.getElementById('control');
+    var omit = document.getElementById('omit');
+    var omitLabel = document.getElementById('omit-label');
+    var clear = document.getElementById('clear');
+    clear.onclick = function() {
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+    }
+    omit.oninput = function() {
+        omitLabel.innerHTML = omit.value;
+    }
+    omitLabel.innerHTML = omit.value;
+
+    var isDrawing = false;
+    var drawingPoints;
+    var drawingPath;
+    var defaultPathStyle = {
+        strokeWidth: "3px",
+        stroke: "#000",
+        fill: "none",
+    };
+    container.addEventListener('mousedown', function(e) {
+        isDrawing = true;
+        drawingPoints = [];
+    });
+
+    container.addEventListener('mousemove', function(e) {
+        if (isDrawing) {
+            drawingPoints.push({
+                x: e.clientX,
+                y: e.clientY
+            });
+            if (drawingPath) {
+                container.removeChild(drawingPath);
+            }
+            if (control.value === 'bezier') {
+                drawingPath = createPathWithBezier(drawingPoints);
+            } else {
+                drawingPath = createPath(drawingPoints);
+            }
+            Object.assign(drawingPath.style, defaultPathStyle);
+            container.appendChild(drawingPath);
+        }
+    });
+
+    container.addEventListener('mouseup', function(e) {
+        isDrawing = false;
+        if (!drawingPath) {
+            return;
+        }
+        container.removeChild(drawingPath);
+        drawingPath = null;
+        var path;
+        if (control.value === 'bezier') {
+            path = createPathWithBezier(drawingPoints, parseFloat(omit.value), true);
+        } else {
+            path = createPath(drawingPoints);
+        }
+        Object.assign(path.style, defaultPathStyle);
+        container.appendChild(path);
+    });
+
+    function createPath(points) {
+        var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        var attribute = '';
+        points.forEach((point, index) => {
+            if (index === 0) {
+                attribute += `M${point.x}, ${point.y}`;
+            } else {
+                attribute += `L${point.x}, ${point.y}`;
+            }
+        });
+        path.setAttributeNS(null, 'd', attribute);
+        return path;
+    }
+
+    function createPathWithBezier(points, tolerance, highestQuality) {
+        var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        var attribute = SVGCatmullRomSpline.toPath(points.map(point => [point.x, point.y]), tolerance, highestQuality);
+        path.setAttributeNS(null, 'd', attribute);
+        return path;
+    }
+</script>
+
+</html>

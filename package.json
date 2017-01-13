@@ -1,0 +1,25 @@
+{
+    "name": "svg-catmull-rom-spline",
+    "version": "0.0.1",
+    "description": "Convert series of CatmullRom points to Spline",
+    "main": "index.js",
+    "scripts": {
+        "build": "rollup -c rollup.config.js && cp ./bundle.js ./docs/bundle.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "svg",
+        "spline",
+        "catmullrom"
+    ],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "simplify-js": "^1.2.1"
+    },
+    "devDependencies": {
+        "rollup": "^0.41.1",
+        "rollup-plugin-commonjs": "^7.0.0",
+        "rollup-plugin-node-resolve": "^2.0.0"
+    }
+}
