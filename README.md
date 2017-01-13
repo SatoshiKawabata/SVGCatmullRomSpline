@@ -8,16 +8,17 @@ Make path line of SVG smooth.
 ### Demo
 [demo page](https://satoshikawabata.github.io/SVGCatmullRomSpline/)
 
+## Install
+### download from url
+```
+https://satoshikawabata.github.io/SVGCatmullRomSpline/bundle.js
+```
+
 ## Usage
 ### get spline points
 ```js
 var points = [[0, 0], [200, 200], [200, 0], [0, 200]];
 var splinePoints = SVGCatmullRomSpline.toPoints(points);
-```
-
-### download from url
-```
-https://satoshikawabata.github.io/SVGCatmullRomSpline/bundle.js
 ```
 
 ### apply spline attribute to SVG path
