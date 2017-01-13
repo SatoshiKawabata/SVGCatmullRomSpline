@@ -9,6 +9,11 @@ Make path line of SVG smooth.
 [demo page](https://satoshikawabata.github.io/SVGCatmullRomSpline/)
 
 ## Install
+### npm
+```
+npm i svg-catmull-rom-spline
+```
+
 ### download from url
 ```
 https://satoshikawabata.github.io/SVGCatmullRomSpline/bundle.js
