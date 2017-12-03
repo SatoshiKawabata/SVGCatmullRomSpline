@@ -32,6 +32,6 @@ var points = [[0, 0], [200, 200], [200, 0], [0, 200]];
 var tolerance = 4;
 var highestQuality = true;
 var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-var attribute = SVGCatmullRomSpline.toPath(points.map(points), tolerance, highestQuality);
+var attribute = SVGCatmullRomSpline.toPath(points, tolerance, highestQuality);
 path.setAttributeNS(null, 'd', attribute);
 ```
